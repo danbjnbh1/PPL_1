@@ -14,12 +14,15 @@ const calculateRevenueByCategory = (
         transaction.quantity > 5 ? transaction.price * 0.9 : transaction.price,
     }))
     .filter((transaction) => transaction.price >= 50)
-    .reduce((acc, transaction) => {
-      acc[transaction.category] =
-        (acc[transaction.category] || 0) +
-        transaction.price * transaction.quantity;
-      return acc;
-    }, {} as Record<string, number>);
+    .reduce(
+      (acc, transaction) => ({
+        ...acc,
+        [transaction.category]:
+          (acc[transaction.category] || 0) +
+          transaction.price * transaction.quantity,
+      }),
+      {} as Record<string, number>
+    );
 
 type type1 = <T>(x: T[], y: (value: T) => boolean) => boolean;
 const test1: type1 = (x, y) => x.some(y);
