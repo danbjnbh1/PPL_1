@@ -20,5 +20,17 @@ const returnSquaredIfFoundEven_v1 = (a: number[]): number => {
   }
 };
 
-export const returnSquaredIfFoundEven_v2: undefined = undefined;
-export const returnSquaredIfFoundEven_v3: undefined = undefined;
+export const returnSquaredIfFoundEven_v2 = (a: number[]): Result<number> =>
+  bind<number, number>(
+    findResult((x: number) => x % 2 === 0, a),
+    (x: number) => makeOk(x * x)
+  );
+
+export const returnSquaredIfFoundEven_v3: (a: number[]) => number = (
+  a: number[]
+) =>
+  either<number, number>(
+    findResult((x: number) => x % 2 === 0, a),
+    (value: number) => value * value,
+    (message) => -1
+  );
