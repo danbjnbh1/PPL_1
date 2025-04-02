@@ -4,10 +4,10 @@ type Transaction = {
   quantity: number;
 };
 
-function calculateRevenueByCategory(
+const calculateRevenueByCategory = (
   transactions: Transaction[]
-): Record<string, number> {
-  return transactions
+): Record<string, number> =>
+  transactions
     .map((transaction) => ({
       ...transaction,
       price:
@@ -20,7 +20,6 @@ function calculateRevenueByCategory(
         transaction.price * transaction.quantity;
       return acc;
     }, {} as Record<string, number>);
-}
 
 type type1 = <T>(x: T[], y: (value: T) => boolean) => boolean;
 const test1: type1 = (x, y) => x.some(y);
@@ -37,5 +36,8 @@ const test4: type4 = (x) => x.reduce((acc, cur) => acc + cur, 0);
 type type5 = <T>(x: boolean, y: T[]) => T;
 const test5: type5 = (x, y) => (x ? y[0] : y[1]);
 
-type type6 = (f: (x: number) => number, g: (x: number) => number) => (x: number) => number;
-const test6: type6 = (f,g) => x => f(g(x+1))
+type type6 = (
+  f: (x: number) => number,
+  g: (x: number) => number
+) => (x: number) => number;
+const test6: type6 = (f, g) => (x) => f(g(x + 1));
