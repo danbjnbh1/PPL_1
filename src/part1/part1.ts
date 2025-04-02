@@ -44,4 +44,3 @@ type type6 = (
   g: (x: number) => number
 ) => (x: number) => number;
 const test6: type6 = (f, g) => (x) => f(g(x + 1));
-
