@@ -45,16 +45,3 @@ type type6 = (
 ) => (x: number) => number;
 const test6: type6 = (f, g) => (x) => f(g(x + 1));
 
-type Result<T> = 
-  | { type: 'Ok'; value: T }
-  | { type: 'Failure' };
-
-const findResult = <T>(
-  predicate: (value: T) => boolean,
-  array: T[]
-): Result<T> => {
-  const found = array.find(predicate);
-  return found !== undefined 
-    ? { type: 'Ok', value: found }
-    : { type: 'Failure' };
-};
